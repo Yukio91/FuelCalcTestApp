@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FuelCalcTestApp.ViewModels"
+        x:Class="FuelCalcTestApp.Views.AddDataWindow"
+        x:DataType="vm:AddDataViewModel"
+        Title="Добавление данных"
+        Width="400" Height="580" CanResize="True"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="20" Spacing="14">
+
+    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4" Padding="12">
+      <StackPanel Spacing="6">
+        <TextBlock Text="Добавить маршрут" FontWeight="Bold"/>
+        <TextBlock Text="Пункт отправки"/>
+        <TextBox Text="{Binding RouteFrom}" />
+        <TextBlock Text="Пункт прибытия"/>
+        <TextBox Text="{Binding RouteTo}"/>
+        <TextBlock Text="Расстояние, км"/>
+        <NumericUpDown Value="{Binding RouteDistance}" Minimum="0" Maximum="1000000"
+                       FormatString="0.0" Increment="1"/>
+        <Button Content="Добавить" Command="{Binding AddRouteCommand}"/>
+      </StackPanel>
+    </Border>
+
+    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4" Padding="12">
+      <StackPanel Spacing="6">
+        <TextBlock Text="Добавить марку автомобиля" FontWeight="Bold"/>
+        <TextBlock Text="Марка автомобиля"/>
+        <TextBox Text="{Binding CarBrand}"/>
+        <TextBlock Text="Расход топлива, л/км"/>
+        <NumericUpDown Value="{Binding CarFuelPerKm}" Minimum="0" Maximum="10"
+                       FormatString="0.000" Increment="0.005"/>
+        <Button Content="Добавить" Command="{Binding AddCarCommand}"/>
+      </StackPanel>
+    </Border>
+
+    <TextBlock Text="{Binding Status}" Foreground="Green"/>
+  </StackPanel>
+</Window>

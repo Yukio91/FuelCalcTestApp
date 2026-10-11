@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FuelCalcTestApp.ViewModels"
+        xmlns:m="using:FuelCalcTestApp.Models"
+        x:Class="FuelCalcTestApp.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Расчёт расхода топлива"
+        Width="380" Height="430" CanResize="False"
+        WindowStartupLocation="CenterScreen">
+
+  <StackPanel Margin="20" Spacing="6">
+
+    <TextBlock Text="Пункт отправки"/>
+    <ComboBox HorizontalAlignment="Stretch"
+              ItemsSource="{Binding Departures}"
+              SelectedItem="{Binding SelectedDeparture}"/>
+
+    <TextBlock Text="Пункт прибытия"/>
+    <ComboBox HorizontalAlignment="Stretch"
+              IsEnabled="{Binding IsArrivalEnabled}"
+              ItemsSource="{Binding Arrivals}"
+              SelectedItem="{Binding SelectedArrival}"/>
+
+    <TextBlock Text="Марка автомобиля"/>
+    <ComboBox HorizontalAlignment="Stretch"
+              ItemsSource="{Binding Cars}"
+              SelectedItem="{Binding SelectedCar}">
+      <ComboBox.ItemTemplate>
+        <DataTemplate x:DataType="m:Car">
+          <TextBlock Text="{Binding CarBrand}"/>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+
+    <TextBlock Text="Расстояние, км"/>
+    <NumericUpDown Value="{Binding Distance, Mode=OneWay}"
+                   IsReadOnly="True" ShowButtonSpinner="False"
+                   FormatString="0.0" Minimum="0" Maximum="1000000"/>
+
+    <TextBlock Text="Расход топлива, л"/>
+    <NumericUpDown Value="{Binding Fuel, Mode=OneWay}"
+                   IsReadOnly="True" ShowButtonSpinner="False"
+                   FormatString="0.00" Minimum="0" Maximum="1000000"/>
+
+    <Button Content="Добавить данные…" Margin="0,12,0,0"
+            HorizontalAlignment="Stretch"
+            Command="{Binding OpenAddDataCommand}"/>
+  </StackPanel>
+</Window>
